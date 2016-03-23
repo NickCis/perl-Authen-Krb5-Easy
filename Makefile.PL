@@ -3,18 +3,29 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 
 # get some stuff we need to know
-print "Enter path to kerberos libraries: ";
-my $krblibs = <STDIN>;
-chomp($krblibs);
-print "Enter path to kerberos headers: ";
-my $krbincs = <STDIN>;
-chomp($krbincs);
+my $krblibs;
+my $krbincs;
+if(system('which krb5-config &> /dev/null')){
+	print "Enter path to kerberos libraries: ";
+	$krblibs = <STDIN>;
+	chomp($krblibs);
+	$krblibs = '-L' . $krblibs . ' -lkrb5';
+	print "Enter path to kerberos headers: ";
+	$krbincs = <STDIN>;
+	chomp($krbincs);
+	$krbincs = '-I' . $krbincs . '';
+}else{
+	$krblibs = `krb5-config --libs`;
+	chomp($krblibs);
+	$krbincs = `krb5-config --cflags`;
+	chomp($krbincs);
+}
 
 WriteMakefile(
     'NAME'		=> 'Authen::Krb5::Easy',
     'VERSION_FROM'	=> 'Easy.pm', # finds $VERSION
     'PREREQ_PM'		=> {}, # e.g., Module::Name => 1.1
-    'LIBS'		=> ['-L' . $krblibs . ' -lkrb5'], # e.g., '-lm'
+    'LIBS'		=> [$krblibs], # e.g., '-lm'
     'DEFINE'		=> '', # e.g., '-DHAVE_SOMETHING'
-    'INC'		=> '-I' . $krbincs . '', # e.g., '-I/usr/include/other'
+    'INC'		=> $krbincs, # e.g., '-I/usr/include/other'
 );
