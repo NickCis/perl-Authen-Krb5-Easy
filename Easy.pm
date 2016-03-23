@@ -26,7 +26,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '0.90';
+our $VERSION = '0.91';
 
 bootstrap Authen::Krb5::Easy $VERSION;
 
