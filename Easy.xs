@@ -80,8 +80,6 @@ kinit(keytab_name, principle)
 	
 		krb5_get_init_creds_opt_init(&options);
 		memset(&creds, 0, sizeof(creds));
-		krb5_get_init_creds_opt_set_forwardable(&options, 0);
-		krb5_get_init_creds_opt_set_proxiable(&options, 0);
 	
 		code = krb5_kt_resolve(context, keytab_name, &keytab);
 		if(code != 0)
