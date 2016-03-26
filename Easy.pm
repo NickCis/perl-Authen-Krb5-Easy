@@ -34,7 +34,9 @@ bootstrap Authen::Krb5::Easy $VERSION;
 
 sub kexpired()
 {
-	return kexpires() < time() ? 1 : 0;
+	my $expires = kexpires();
+	return kexpires() < time() ? 1 : 0 if($expires);
+	return 1;
 }
 
 sub kerror()
