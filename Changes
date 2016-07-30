@@ -7,4 +7,8 @@ Revision history for Perl extension Authen::Krb5::Easy.
        - Everything ready for distro. Need to check with cpan folks before 1.0
 0.91  Wed Mar 23 04:02:16 2016
        - Removed hardcoded options of set proxiable and forwardable.
+0.92  Sat Jul 30 14:21:15 2016
+       - #65109 Makefile.PL uses krb5-config when available
+       - #94454 Using ExtUtils::MakeMaker::prompt in order to ask questions on Makefile.PL
+       - kexpired: if no ticket detected do not throw Use of uninitialized value in numeric lt (<) at /usr/local/lib64/perl5/Authen/Krb5/Easy.pm line 37, supose it has expired
 
